@@ -52,28 +52,28 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
     );
 
     // ── Tool 2: assess ─────────────────────────────────────────
-    // Takes a problem description, assesss the stuck-type, and
-    // returns the recommended framework with its full content.
+    // Takes a profile state description, assesses the profile gap,
+    // and returns the recommended framework with its full content.
     this.server.tool(
       "assess",
-      "Describe the current profile state and available evidence and this tool will assess the type of profile gap, recommend the best profiling framework, and return the full methodology so you can work through it. Include as much context as possible: what you've tried, what feels frustrating, what success would look like.",
+      "Describe the current profile state and available evidence and this tool will assess the type of profile gap, recommend the best profiling framework, and return the full methodology so you can work through it. Include as much context as possible: which sections are populated, what evidence types are available, and what the current tier status is.",
       {
         problem: z
           .string()
           .describe(
-            "Description of the problem or the current profile state and available evidence. Be specific about what feels frustrating or blocked."
+            "Description of the current profile state, available evidence, and what profile sections need advancing. Include section tiers, evidence types, and any cross-section contradictions observed."
           ),
         what_tried: z
           .string()
           .optional()
-          .describe("What approaches have already been tried"),
+          .describe("What frameworks or approaches have already been applied"),
         success_looks_like: z
           .string()
           .optional()
-          .describe("What a good outcome would look like"),
+          .describe("What a good profile outcome would look like"),
       },
       async ({ problem, what_tried, success_looks_like }) => {
-        // Load the thinking-toolkit router content
+        // Load the profiling toolkit router content
         const router = FRAMEWORK_MAP.get("psychological-profiling-toolkit");
 
         // Build diagnostic context
@@ -92,63 +92,87 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
           let score = 0;
           const lower = (problem + " " + (what_tried ?? "") + " " + (success_looks_like ?? "")).toLowerCase();
 
-          // Pattern matching based on the diagnostic decision tree
+          // Pattern matching based on the profile dispatch table
           const patterns: Record<string, string[]> = {
-            "cause-effect-confusion": [
-              "fix", "keep failing", "same problem", "recur", "symptom",
-              "wrong problem", "tried before", "comes back", "not working",
-              "keeps breaking",
+            "big-five": [
+              "personality", "trait", "openness", "conscientiousness",
+              "extraversion", "agreeableness", "neuroticism", "ocean",
+              "five factor", "big five", "temperament", "disposition",
             ],
-            "temporal-blindness": [
-              "order", "timing", "sequence", "first", "before", "after",
-              "path", "lock-in", "irreversible", "when should",
+            "attachment-architecture": [
+              "attachment", "relational", "trust", "dependence",
+              "proximity", "avoidant", "anxious", "secure base",
+              "abandonment", "intimacy", "bonding",
             ],
-            "collision-zone-thinking": [
-              "tried everything", "no ideas", "incremental", "breakthrough",
-              "innovative", "creative", "nothing exciting", "stale",
-              "exhausted", "conventional",
+            "locus-of-control": [
+              "attribution", "locus", "internal", "external",
+              "chance", "luck", "powerful others", "agency",
+              "blame", "credit", "responsibility", "control",
             ],
-            "inversion-exercise": [
-              "have to", "must", "only way", "constraint", "assumption",
-              "no choice", "forced", "trapped", "can't change",
+            "emotion-regulation": [
+              "emotion", "regulation", "distress", "impulse",
+              "emotional vocabulary", "dysregulation", "overwhelm",
+              "coping", "affect", "mood", "feelings",
             ],
-            "meta-pattern-recognition": [
-              "pattern", "keep seeing", "same dynamic", "across",
-              "different contexts", "déjà vu", "recurring shape",
+            "defence-mechanisms": [
+              "defence", "defense", "projection", "denial",
+              "splitting", "intellectualis", "rationalis",
+              "displacement", "sublimation", "humour deflect",
             ],
-            "scale-game": [
-              "scale", "edge case", "1000x", "extreme", "production",
-              "volume", "what if more", "grow", "limit",
+            "cognitive-distortions": [
+              "distortion", "catastrophi", "all-or-nothing",
+              "mind-reading", "should statement", "black and white",
+              "overgenerali", "magnif", "minimis", "absolute language",
             ],
-            "simplification-cascades": [
-              "complex", "special case", "multiple ways", "bloated",
-              "overgrown", "too many", "simplify", "accumulating",
-              "sprawl",
+            "cognitive-triad": [
+              "self-view", "worldview", "future orientation",
+              "hopeless", "worthless", "self-description",
+              "cognitive triad", "beck", "negative self",
             ],
-            "perspective-mapping": [
-              "don't understand", "stakeholder", "they think",
-              "cross-functional", "friction", "alignment", "disagree",
-              "miscommunication", "different view",
+            "existential-orientation": [
+              "meaning", "purpose", "mortality", "death",
+              "isolation", "freedom", "existential", "absurd",
+              "nihilis", "legacy", "spirituality",
             ],
-            "contradiction-holding": [
-              "both true", "paradox", "contradictory", "either",
-              "neither", "incompatible", "tension", "trade-off",
-              "dilemma",
+            "contradiction-map": [
+              "contradiction", "inconsisten", "oscillat",
+              "both", "conflicting", "paradox", "split",
+              "cross-section", "prediction violation",
             ],
-            "feedback-loop-mapping": [
-              "keeps happening", "despite fixes", "vicious cycle",
-              "loop", "circular", "backfire", "unintended",
-              "consequence", "self-reinforcing",
+            "predictive-risk-map": [
+              "risk", "trigger", "vulnerability", "predict",
+              "warning sign", "decompensation", "relapse",
+              "recovery", "resilience", "protective factor",
             ],
-            "priority-paralysis": [
-              "prioritise", "prioritize", "equally important", "frozen",
-              "list", "overwhelmed", "everything urgent", "can't choose",
-              "too many tasks",
+            "cognitive-processing": [
+              "system 1", "system 2", "reflective", "intuitive",
+              "metacognit", "dual process", "cognitive reflection",
+              "problem-solving", "self-correction", "heuristic",
             ],
-            "decision-paralysis": [
-              "can't decide", "analysis paralysis", "waiting", "certainty",
-              "oscillating", "threshold", "commit", "overthinking",
-              "procrastinat",
+            "behavioural-defaults": [
+              "default", "uncertainty", "novel situation",
+              "species-typical", "prospect theory", "loss aversion",
+              "risk-seeking", "status quo", "habitual",
+            ],
+            "pigeon-superstition-superposition": [
+              "superstiti", "causal claim", "ritual", "extinction",
+              "contingency", "spurious", "illusory correlation",
+              "signal detection", "pigeon", "coincidence",
+            ],
+            "interpersonal-strategy": [
+              "cooperation", "defection", "punishment", "forgiveness",
+              "reciproc", "tit-for-tat", "game theory", "conflict",
+              "retaliat", "trust game", "prisoner",
+            ],
+            "signal-discrimination": [
+              "epistemic", "belief updat", "anomaly",
+              "source evaluation", "shortcut learning", "calibration",
+              "fox", "hedgehog", "signal", "noise", "discriminat",
+            ],
+            "approach-avoidance": [
+              "approach", "avoidance", "bis", "bas",
+              "inhibition", "activation", "risk language",
+              "topic avoidance", "engagement", "withdrawal",
             ],
           };
 
@@ -175,17 +199,17 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
               {
                 type: "text" as const,
                 text: [
-                  "## Diagnosis: Unclear stuck-type",
+                  "## Assessment: Unclear profile gap",
                   "",
-                  "The problem description didn't match a clear pattern. Here's the full diagnostic toolkit so you can work through the decision tree manually.",
+                  "The description didn't match a clear profiling framework. Here's the full profiling toolkit so you can work through the dispatch table manually.",
                   "",
                   "### Diagnostic Questions to Ask:",
-                  "1. What have you already tried?",
-                  "2. What would success look like?",
-                  "3. What constraint feels most frustrating?",
-                  "4. Have you seen this problem shape before?",
-                  "5. Is there a sequence or timing dimension?",
-                  "6. Are there other stakeholders who see this differently?",
+                  "1. Which profile sections are currently empty or at Tier 0?",
+                  "2. What evidence types are available (court records, interviews, cultural output)?",
+                  "3. Are any populated sections producing cross-section prediction violations?",
+                  "4. Are there unanalysed causal claims in the evidence?",
+                  "5. Have S1–S8 reached Tier 2+ with S10 still empty?",
+                  "6. What is the current evidence tier ceiling?",
                   "",
                   "---",
                   "",
@@ -201,7 +225,7 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
             {
               type: "text" as const,
               text: [
-                `## Diagnosis: ${primary.framework}`,
+                `## Assessment: ${primary.framework}`,
                 `**Trigger profile_signal:** "${primary.profile_signal}"`,
                 `**Match confidence:** ${primary.score} keyword${primary.score !== 1 ? "s" : ""} matched`,
                 "",
@@ -209,7 +233,7 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
                 context,
                 "",
                 secondary.score > 0
-                  ? `**Secondary recommendation:** ${secondary.framework} (${secondary.score} match${secondary.score !== 1 ? "es" : ""}) — use if the primary doesn't fully resolve. Load with: get_framework("${secondary.frameworkId}")`
+                  ? `**Secondary recommendation:** ${secondary.framework} (${secondary.score} match${secondary.score !== 1 ? "es" : ""}) — use if primary framework doesn't fully advance the section. Load with: get_framework("${secondary.frameworkId}")`
                   : "",
                 "",
                 "---",
@@ -233,7 +257,7 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
         framework_id: z
           .string()
           .describe(
-            'The framework ID, e.g. "cause-effect-confusion", "scale-game", "decision-paralysis"'
+            'The framework ID, e.g. "big-five", "attachment-architecture", "locus-of-control", "contradiction-map"'
           ),
       },
       async ({ framework_id }) => {
@@ -269,11 +293,11 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
       }
     );
 
-    // ── Tool 4: get_thinking_toolkit ─────────────────────────────
+    // ── Tool 4: get_profiling_toolkit ─────────────────────────────
     // Returns the master router/dispatcher skill.
     this.server.tool(
-      "get_thinking_toolkit",
-      "Load the master Thinking Toolkit — the diagnostic router that maps stuck-types to frameworks. Contains the full decision tree, diagnostic questions, framework combinations table, and when-not-to-use guidance. Use this when you want to understand the full system rather than a single framework.",
+      "get_profiling_toolkit",
+      "Load the master Profiling Toolkit — the orchestration router that maps profile gaps to frameworks. Contains the full dispatch table, evidence tier system, profile state assessment decision tree, framework combinations, and methodological countermeasures. Use this when you want to understand the full profiling system rather than a single framework.",
       {},
       async () => {
         const toolkit = FRAMEWORK_MAP.get("psychological-profiling-toolkit");
@@ -281,7 +305,7 @@ export class PsychologicalProfilingToolkit extends McpAgent<Env> {
           content: [
             {
               type: "text" as const,
-              text: toolkit?.content ?? "Thinking toolkit not found.",
+              text: toolkit?.content ?? "Profiling toolkit not found.",
             },
           ],
         };
@@ -303,7 +327,7 @@ export default {
           name: "psychological-profiling-toolkit",
           version: "1.0.0",
           description:
-            "12-framework thinking toolkit for diagnosing and resolving profile gap. Covers problem framing, creative breakthrough, pattern recognition, systems thinking, and action threshold crossing.",
+            "16-framework psychological profiling toolkit for constructing Cognitive Surrogate Profiles from documentary evidence. Covers personality structure, attachment, cognition, emotion regulation, defence mechanisms, interpersonal strategy, and risk prediction.",
           endpoints: {
             sse: "/sse",
             mcp: "/mcp",
@@ -312,7 +336,7 @@ export default {
             "list_frameworks",
             "assess",
             "get_framework",
-            "get_thinking_toolkit",
+            "get_profiling_toolkit",
           ],
         }, null, 2),
         {
