@@ -356,6 +356,20 @@ The AAI (George, Kaplan & Main, 1985) was designed for semi-structured clinical 
 
 <examples>
 <example>
+<input>Documentary evidence: Single podcast interview (2023) in which the subject describes a recent breakup: "I just shut down. I didn't cry, I didn't call anyone. I moved out that weekend and never looked back. That's how I handle things — clean break, move on." No other relational narratives available.</input>
+<assessment>
+**Pattern signal: Dismissing (PROVISIONAL)**
+**Coherence marker — Quantity:** Sparse relational narrative. Subject summarises a significant attachment event in three sentences with no emotional elaboration.
+**Coherence marker — Manner:** Controlled, clipped delivery. "Clean break, move on" functions as a self-sufficiency motto.
+**Signal 1:** Podcast interview — single source, informal but edited for broadcast.
+**Evidence Tier: 1 (Provisional) — HOLD AS PROVISIONAL. Do NOT report as finding.**
+**Why Tier 1 is correct here:** Single narrative source. Cannot distinguish trait dismissing from situational coping (subject may have been performing composure for a public interview). Cannot rule out genre-style confusion — podcast format rewards concise, confident delivery which mimics dismissing markers. The "clean break" language could reflect genuine avoidant attachment OR a culturally normative masculine presentation OR a rehearsed public narrative that differs from private experience.
+**What would advance to Tier 2:** A second narrative source from a different context (e.g., court testimony, memoir, social media post about a different relationship) showing the same sparse/controlled pattern around attachment themes. If subject produces rich, specific, emotionally integrated relational narrative in the second source, the dismissing signal collapses.
+**Cross-validation:** Cannot proceed — Tier 1 observations do not warrant cross-validation dispatch. Hold until replicated.
+</assessment>
+</example>
+
+<example>
 <input>Documentary evidence: Subject's memoir (2018) describes childhood: "My mother was the most loving woman you could ever meet. She did everything for us. We had the best childhood." No specific memories accompany these claims. When pressed by interviewer in a separate radio interview (2020), subject says: "I don't really remember much about being young, to be honest. It was normal. Nothing to report."</input>
 <assessment>
 **Pattern signal: Dismissing**
@@ -2634,6 +2648,7 @@ Predictive Risk Map synthesises findings from S1–S8 into a structured professi
 S10 risk synthesis is derived from and constrained by:
 - **S5, S6, S7, S8 mandatory:** Defence mechanisms (S5), distortions (S6), cognitive triad (S7), existential orientation (S8) are core predictors. If any of these is Tier 0/1, risk assessment cannot proceed to Tier 3+.
 - **S1, S2, S3, S4 supporting:** Big Five (S1), attachment (S2), locus of control (S3), emotion regulation (S4) provide context for risk manifestation.
+- **S9 (Contradiction Map) feeding:** Unresolved contradictions from S9 are themselves risk factors for behavioural instability. Contradiction axes with high oscillation speed predict crisis points — the subject cannot maintain a stable position, increasing the likelihood of impulsive action at the poles. S9 findings constrain S10 interpretation: a risk estimate that ignores active contradiction axes will underpredict volatility. Specifically, unresolved S9 axes should be assessed as H-item amplifiers (they increase the probability that existing risk factors manifest under pressure).
 - **Actuarial combination:** Grove et al. (2000) demonstrates actuarial combination of independent risk factors outperforms clinical judgment. Use explicit weighting (each H-item contributes proportionally to overall risk estimate).
 - **Base-rate adjustment:** Non-forensic populations have lower violence base rates than forensic samples. Do NOT apply forensic base rates (23–26% institutional violence). Adjust to general-population estimates (<3–5%).
 

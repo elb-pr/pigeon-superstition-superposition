@@ -62,6 +62,7 @@ Predictive Risk Map synthesises findings from S1–S8 into a structured professi
 S10 risk synthesis is derived from and constrained by:
 - **S5, S6, S7, S8 mandatory:** Defence mechanisms (S5), distortions (S6), cognitive triad (S7), existential orientation (S8) are core predictors. If any of these is Tier 0/1, risk assessment cannot proceed to Tier 3+.
 - **S1, S2, S3, S4 supporting:** Big Five (S1), attachment (S2), locus of control (S3), emotion regulation (S4) provide context for risk manifestation.
+- **S9 (Contradiction Map) feeding:** Unresolved contradictions from S9 are themselves risk factors for behavioural instability. Contradiction axes with high oscillation speed predict crisis points — the subject cannot maintain a stable position, increasing the likelihood of impulsive action at the poles. S9 findings constrain S10 interpretation: a risk estimate that ignores active contradiction axes will underpredict volatility. Specifically, unresolved S9 axes should be assessed as H-item amplifiers (they increase the probability that existing risk factors manifest under pressure).
 - **Actuarial combination:** Grove et al. (2000) demonstrates actuarial combination of independent risk factors outperforms clinical judgment. Use explicit weighting (each H-item contributes proportionally to overall risk estimate).
 - **Base-rate adjustment:** Non-forensic populations have lower violence base rates than forensic samples. Do NOT apply forensic base rates (23–26% institutional violence). Adjust to general-population estimates (<3–5%).
 

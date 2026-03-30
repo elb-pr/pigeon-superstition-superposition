@@ -107,6 +107,20 @@ The AAI (George, Kaplan & Main, 1985) was designed for semi-structured clinical 
 
 <examples>
 <example>
+<input>Documentary evidence: Single podcast interview (2023) in which the subject describes a recent breakup: "I just shut down. I didn't cry, I didn't call anyone. I moved out that weekend and never looked back. That's how I handle things — clean break, move on." No other relational narratives available.</input>
+<assessment>
+**Pattern signal: Dismissing (PROVISIONAL)**
+**Coherence marker — Quantity:** Sparse relational narrative. Subject summarises a significant attachment event in three sentences with no emotional elaboration.
+**Coherence marker — Manner:** Controlled, clipped delivery. "Clean break, move on" functions as a self-sufficiency motto.
+**Signal 1:** Podcast interview — single source, informal but edited for broadcast.
+**Evidence Tier: 1 (Provisional) — HOLD AS PROVISIONAL. Do NOT report as finding.**
+**Why Tier 1 is correct here:** Single narrative source. Cannot distinguish trait dismissing from situational coping (subject may have been performing composure for a public interview). Cannot rule out genre-style confusion — podcast format rewards concise, confident delivery which mimics dismissing markers. The "clean break" language could reflect genuine avoidant attachment OR a culturally normative masculine presentation OR a rehearsed public narrative that differs from private experience.
+**What would advance to Tier 2:** A second narrative source from a different context (e.g., court testimony, memoir, social media post about a different relationship) showing the same sparse/controlled pattern around attachment themes. If subject produces rich, specific, emotionally integrated relational narrative in the second source, the dismissing signal collapses.
+**Cross-validation:** Cannot proceed — Tier 1 observations do not warrant cross-validation dispatch. Hold until replicated.
+</assessment>
+</example>
+
+<example>
 <input>Documentary evidence: Subject's memoir (2018) describes childhood: "My mother was the most loving woman you could ever meet. She did everything for us. We had the best childhood." No specific memories accompany these claims. When pressed by interviewer in a separate radio interview (2020), subject says: "I don't really remember much about being young, to be honest. It was normal. Nothing to report."</input>
 <assessment>
 **Pattern signal: Dismissing**
